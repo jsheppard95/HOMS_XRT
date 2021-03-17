@@ -183,7 +183,7 @@
     <Compile Include="POUs\FB_MPS_STATES.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
+    <Compile Include="POUs\Main.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Modbus\p_ModbusRx_OutputCoils.TcPOU">
@@ -313,10 +313,6 @@
       <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_MC2</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Tc2_SerialCom">
-      <DefaultResolution>Tc2_SerialCom, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_SerialCom</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -392,6 +388,9 @@
   <ItemGroup>
     <LibraryReference Include="LCLS General,2.4.2,SLAC">
       <Namespace>LCLS_General</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="Tc2_SerialCom,3.3.7.0,Beckhoff Automation GmbH">
+      <Namespace>Tc2_SerialCom</Namespace>
     </LibraryReference>
   </ItemGroup>
   <ProjectExtensions>

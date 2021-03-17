@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4022.30" ClassName="CNestedPlcProjDef">
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmItem" TcSmVersion="1.0" TcVersion="3.1.4022.32" ClassName="CNestedPlcProjDef">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{3749F519-7E88-4D20-B8BB-B17B89339572}" Namespace="Tc2_SerialCom" AutoDeleteType="true">EL6inData22B</Name>
@@ -76,7 +76,7 @@
 			</Format>
 		</DataType>
 		<DataType>
-			<Name GUID="{4C3FC5AC-D5AA-44C6-AC5A-159774BA0F6D}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_AXIS_REF_STATE</Name>
+			<Name GUID="{CBC83B73-B816-4597-A9E5-2B03263CA131}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_AXIS_REF_STATE</Name>
 			<BitSize>32</BitSize>
 			<SubItem>
 				<Name>Operational</Name>
@@ -187,6 +187,12 @@
 				<BitOffs>17</BitOffs>
 			</SubItem>
 			<SubItem>
+				<Name>IsDriveLimitActive</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>18</BitOffs>
+			</SubItem>
+			<SubItem>
 				<Name>ContinuousMotion</Name>
 				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
 				<BitSize>1</BitSize>
@@ -273,6 +279,11 @@
 			<Format Name="IEC">
 				<Printf>16#%08X</Printf>
 			</Format>
+			<Relations>
+				<Relation Priority="100">
+					<Type>{4C3FC5AC-D5AA-44C6-AC5A-159774BA0F6D}</Type>
+				</Relation>
+			</Relations>
 		</DataType>
 		<DataType>
 			<Name GUID="{6EF49753-C72C-4F50-AA44-3C7498E76CFE}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_AXIS_REF_OPMODE</Name>
@@ -468,11 +479,11 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC" TcBaseType="true">NCTOPLC_AXIS_REF</Name>
+			<Name GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC" TcBaseType="true">NCTOPLC_AXIS_REF</Name>
 			<BitSize>2048</BitSize>
 			<SubItem>
 				<Name>StateDWord</Name>
-				<Type GUID="{4C3FC5AC-D5AA-44C6-AC5A-159774BA0F6D}" Namespace="MC">NCTOPLC_AXIS_REF_STATE</Type>
+				<Type GUID="{CBC83B73-B816-4597-A9E5-2B03263CA131}" Namespace="MC">NCTOPLC_AXIS_REF_STATE</Type>
 				<BitSize>32</BitSize>
 				<BitOffs>0</BitOffs>
 			</SubItem>
@@ -727,6 +738,18 @@ External Setpoint Generation:
 				<BitOffs>1600</BitOffs>
 			</SubItem>
 			<SubItem>
+				<Name>AbsPhasingPos</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>1664</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TorqueOffset</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>1728</BitOffs>
+			</SubItem>
+			<SubItem>
 				<Name>ActPosWithoutPosCorrection</Name>
 				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
 				<BitSize>64</BitSize>
@@ -771,6 +794,9 @@ External Setpoint Generation:
 				</Relation>
 				<Relation Priority="100">
 					<Type GUID="{8CDE0C45-AB9D-42DB-BC94-1CF7521AB268}"/>
+				</Relation>
+				<Relation Priority="100">
+					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}"/>
 				</Relation>
 			</Relations>
 		</DataType>
@@ -1305,7 +1331,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM1PitchControl.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1354,7 +1380,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM1Y_GantryControl.PAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1403,7 +1429,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM1Y_GantryControl.SAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1452,7 +1478,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM1Y_GantryControl.VAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1501,7 +1527,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM1X_GantryControl.PAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1550,7 +1576,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM1X_GantryControl.SAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1599,7 +1625,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM1X_GantryControl.VAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1648,7 +1674,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM2PitchControl.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1697,7 +1723,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM2Y_GantryControl.PAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1746,7 +1772,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM2Y_GantryControl.SAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1795,7 +1821,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM2Y_GantryControl.VAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1844,7 +1870,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM2X_GantryControl.PAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1893,7 +1919,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM2X_GantryControl.SAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1942,7 +1968,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM2X_GantryControl.VAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -1991,7 +2017,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM3PitchControl.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2040,7 +2066,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM3Y_GantryControl.PAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2089,7 +2115,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM3Y_GantryControl.SAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2138,7 +2164,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM3Y_GantryControl.VAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2187,7 +2213,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM3X_GantryControl.PAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2236,7 +2262,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM3X_GantryControl.SAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2285,7 +2311,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.XRTM3X_GantryControl.VAxis_Drive.Drive.MasterAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2379,7 +2405,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.fbM1P1LS.Pitch.Stepper.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2480,7 +2506,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.fbM2P1LS.Pitch.Stepper.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2581,7 +2607,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.fbM3P1LS.Pitch.Stepper.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2682,7 +2708,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.fbMPS_States.GANTRY.PAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2783,7 +2809,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.fbMPS_States.GANTRY.SAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -2884,7 +2910,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>MAIN.fbMPS_States.GANTRY.VAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3127,7 +3153,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS1_Pitch.Stepper.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3228,7 +3254,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS1_YGantry.PAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3329,7 +3355,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS1_YGantry.SAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3430,7 +3456,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS1_YGantry.VAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3531,7 +3557,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS1_XGantry.PAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3632,7 +3658,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS1_XGantry.SAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3733,7 +3759,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS1_XGantry.VAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3834,7 +3860,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS1_Bender.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -3928,7 +3954,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS2_Pitch.Stepper.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4029,7 +4055,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS2_YGantry.PAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4130,7 +4156,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS2_YGantry.SAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4231,7 +4257,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS2_YGantry.VAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4332,7 +4358,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS2_XGantry.PAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4433,7 +4459,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS2_XGantry.SAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4534,7 +4560,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS2_XGantry.VAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4635,7 +4661,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS2_Bender.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4729,7 +4755,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS3_Pitch.Stepper.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4830,7 +4856,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS3_YGantry.PAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -4931,7 +4957,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS3_YGantry.SAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -5032,7 +5058,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS3_YGantry.VAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -5133,7 +5159,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS3_XGantry.PAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -5234,7 +5260,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS3_XGantry.SAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -5335,7 +5361,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS3_XGantry.VAxis.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -5436,7 +5462,7 @@ External Setpoint Generation:
 				</Var>
 				<Var>
 					<Name>GVL_Devices.HOMS3_Bender.stAxis.NcToPlc</Name>
-					<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+					<Type GUID="{72F5AAAA-16DF-4ED3-8367-F6C8C3ADAE99}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 					<SubVar>
 						<Name>AxisState</Name>
 						<Comment>
@@ -5874,81 +5900,6 @@ External Setpoint Generation:
 			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 13 (EL2008)">
 				<Link VarA="PlcTask Outputs^GVL.bXRT_M2_IN" VarB="Channel 2^Output"/>
 				<Link VarA="PlcTask Outputs^GVL.bXRT_M2_OUT" VarB="Channel 1^Output"/>
-			</OwnerB>
-			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 14 (EK1122)^M1-B1 (Elmo Drive)">
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_Bender.stCoE.stPlcDriveRef^nSlaveAddr" VarB="InfoData^AdsAddr^port"/>
-			</OwnerB>
-			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 14 (EK1122)^M1-Interface Box (EK1100)^M1-P1-Piezo (EL6001)">
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[0]" VarB="COM Inputs^Data In 0"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[10]" VarB="COM Inputs^Data In 10"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[11]" VarB="COM Inputs^Data In 11"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[12]" VarB="COM Inputs^Data In 12"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[13]" VarB="COM Inputs^Data In 13"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[14]" VarB="COM Inputs^Data In 14"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[15]" VarB="COM Inputs^Data In 15"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[16]" VarB="COM Inputs^Data In 16"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[17]" VarB="COM Inputs^Data In 17"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[18]" VarB="COM Inputs^Data In 18"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[19]" VarB="COM Inputs^Data In 19"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[1]" VarB="COM Inputs^Data In 1"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[20]" VarB="COM Inputs^Data In 20"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[21]" VarB="COM Inputs^Data In 21"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[2]" VarB="COM Inputs^Data In 2"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[3]" VarB="COM Inputs^Data In 3"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[4]" VarB="COM Inputs^Data In 4"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[5]" VarB="COM Inputs^Data In 5"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[6]" VarB="COM Inputs^Data In 6"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[7]" VarB="COM Inputs^Data In 7"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[8]" VarB="COM Inputs^Data In 8"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^D[9]" VarB="COM Inputs^Data In 9"/>
-				<Link VarA="SerialIO Inputs^GVL_SerialIO.Serial_P1_stComIn^Status" VarB="COM Inputs^Status"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^Ctrl" VarB="COM Outputs^Ctrl"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[0]" VarB="COM Outputs^Data Out 0"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[10]" VarB="COM Outputs^Data Out 10"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[11]" VarB="COM Outputs^Data Out 11"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[12]" VarB="COM Outputs^Data Out 12"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[13]" VarB="COM Outputs^Data Out 13"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[14]" VarB="COM Outputs^Data Out 14"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[15]" VarB="COM Outputs^Data Out 15"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[16]" VarB="COM Outputs^Data Out 16"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[17]" VarB="COM Outputs^Data Out 17"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[18]" VarB="COM Outputs^Data Out 18"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[19]" VarB="COM Outputs^Data Out 19"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[1]" VarB="COM Outputs^Data Out 1"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[20]" VarB="COM Outputs^Data Out 20"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[21]" VarB="COM Outputs^Data Out 21"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[2]" VarB="COM Outputs^Data Out 2"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[3]" VarB="COM Outputs^Data Out 3"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[4]" VarB="COM Outputs^Data Out 4"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[5]" VarB="COM Outputs^Data Out 5"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[6]" VarB="COM Outputs^Data Out 6"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[7]" VarB="COM Outputs^Data Out 7"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[8]" VarB="COM Outputs^Data Out 8"/>
-				<Link VarA="SerialIO Outputs^GVL_SerialIO.Serial_P1_stComOut^D[9]" VarB="COM Outputs^Data Out 9"/>
-			</OwnerB>
-			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 14 (EK1122)^M1-P1 (Elmo Drive)">
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_Pitch.Stepper.diInputs" VarB="Inputs^Digital Inputs"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_Pitch.Stepper.iDriveCurrent" VarB="Inputs_1^Current actual value"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_Pitch.Stepper.stCoE.stPlcDriveRef^nSlaveAddr" VarB="InfoData^AdsAddr^port"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_Pitch.diEncCnt" VarB="Inputs^Position actual value"/>
-			</OwnerB>
-			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 14 (EK1122)^M1-X1 (Elmo Drive)">
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_XGantry.PAxis.diEncCnt" VarB="Inputs^Position actual value"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_XGantry.PAxis.diInputs" VarB="Inputs^Digital Inputs"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_XGantry.PAxis.stCoE.stPlcDriveRef^nSlaveAddr" VarB="InfoData^AdsAddr^port"/>
-			</OwnerB>
-			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 14 (EK1122)^M1-X2 (Elmo Drive)">
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_XGantry.SAxis.diInputs" VarB="Inputs^Digital Inputs"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_XGantry.SAxis.stCoE.stPlcDriveRef^nSlaveAddr" VarB="InfoData^AdsAddr^port"/>
-			</OwnerB>
-			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 14 (EK1122)^M1-Y1 (Elmo Drive)">
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_YGantry.PAxis.diEncCnt" VarB="Inputs^Position actual value"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_YGantry.PAxis.diInputs" VarB="Inputs^Digital Inputs"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_YGantry.PAxis.stCoE.stPlcDriveRef^nSlaveAddr" VarB="InfoData^AdsAddr^port"/>
-			</OwnerB>
-			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 14 (EK1122)^M1-Y2 (Elmo Drive)">
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_YGantry.SAxis.diInputs" VarB="Inputs^Digital Inputs"/>
-				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS1_YGantry.SAxis.stCoE.stPlcDriveRef^nSlaveAddr" VarB="InfoData^AdsAddr^port"/>
 			</OwnerB>
 			<OwnerB Name="TIID^HOMS^Term 1 (EK1200)^Term 14 (EK1122)^M2-B1 (Elmo Drive)">
 				<Link VarA="PlcTask Inputs^GVL_Devices.HOMS2_Bender.stCoE.stPlcDriveRef^nSlaveAddr" VarB="InfoData^AdsAddr^port"/>
