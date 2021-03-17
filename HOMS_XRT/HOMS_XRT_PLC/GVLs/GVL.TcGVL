@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <GVL Name="GVL" Id="{80e92cfe-8789-4b17-a5ef-c2305278c53a}">
     <Declaration><![CDATA[VAR_GLOBAL
 	g_psLogHost	: T_IPv4Addr := '172.21.32.9';
@@ -13,7 +13,6 @@
 	bXRT_M2_IN AT %Q* : BOOL:= FALSE;
 	
 	//Safe-torque-off status
-	gM1STO	:	BOOL;
 	gM2STO	:	BOOL;
 	gM3STO	:	BOOL;
 	
