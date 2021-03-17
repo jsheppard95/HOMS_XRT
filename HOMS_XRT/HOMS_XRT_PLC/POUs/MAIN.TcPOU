@@ -3,13 +3,178 @@
   <POU Name="Main" Id="{ea0bf136-bb68-48b6-99e0-4530d55408e2}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Main
 VAR
+	// Beckhoff Version of XRT-M1
+	// XRTM1
+	// Motors
+	{attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[EL7041-1000_M1_Yup]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[EL7041-1000_M1_Yup]^STM Status^Status^Digital input 2'}
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:MMS:YUP
+	'}
+	M1 : DUT_MotionStage := (fVelocity:=200.0, nEnableMode:=ENUM_StageEnableMode.ALWAYS, bPowerSelf:=TRUE); // XRT-M1 Yup
+	fbMotionStage_m1 : FB_MotionStage;
+
+	{attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[EL7041-1000_M1_Ydwn]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[EL7041-1000_M1_Ydwn]^STM Status^Status^Digital input 2'}
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:MMS:YDWN
+	'}
+	M2 : DUT_MotionStage := (fVelocity:=200.0, nEnableMode:=ENUM_StageEnableMode.ALWAYS, bPowerSelf:=TRUE); // XRT-M1 Ydwn
+	fbMotionStage_m2 : FB_MotionStage;
+
+	{attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[EL7041-1000_M1_Xup]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[EL7041-1000_M1_Xup]^STM Status^Status^Digital input 2'}
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:MMS:XUP
+	'}
+	M3 : DUT_MotionStage := (fVelocity:=1000.0, nEnableMode:=ENUM_StageEnableMode.ALWAYS, bPowerSelf:=TRUE); // XRT-M1 Xup
+	fbMotionStage_m3 : FB_MotionStage;
+
+	{attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[EL7041-1000_M1_Xdwn]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[EL7041-1000_M1_Xdwn]^STM Status^Status^Digital input 2'}
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:MMS:XDWN
+	'}
+	M4 : DUT_MotionStage := (fVelocity:=1000.0, nEnableMode:=ENUM_StageEnableMode.ALWAYS, bPowerSelf:=TRUE); // XRT-M1 Xdwn
+	fbMotionStage_m4 : FB_MotionStage;
+
+	{attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[EL7041-1000_M1_PitchCoarse]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[EL7041-1000_M1_PitchCoarse]^STM Status^Status^Digital input 2'}
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:MMS:PITCH
+	'}
+	M5 : DUT_MotionStage := (fVelocity:=150.0); // XRT-M1 Pitch Stepper
+
+	{attribute 'TcLinkTo' := '.bLimitForwardEnable:=TIIB[EL7041-1000_M1_Bender]^STM Status^Status^Digital input 1;
+                              .bLimitBackwardEnable:=TIIB[EL7041-1000_M1_Bender]^STM Status^Status^Digital input 2'}
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:MMS:BENDER
+	'}
+	M6 : DUT_MotionStage := (fVelocity:=150.0, nEnableMode:=ENUM_StageEnableMode.ALWAYS, bPowerSelf:=TRUE); // XRT-M1 Bender
+	fbMotionStage_m6 : FB_MotionStage;
+
+	{attribute 'TcLinkTo' := '.fbRunHOMS.bSTOEnable1:=TIIB[EL1004_M1_STO]^Channel 1^Input;
+                              .fbRunHOMS.bSTOEnable2:=TIIB[EL1004_M1_STO]^Channel 2^Input;
+	                          .fbRunHOMS.stYupEnc.Count:=TIIB[EL5042_M1_Yupdwn]^FB Inputs Channel 1^Position;
+	                          .fbRunHOMS.stYdwnEnc.Count:=TIIB[EL5042_M1_Yupdwn]^FB Inputs Channel 2^Position;
+	                          .fbRunHOMS.stXupEnc.Count:=TIIB[EL5042_M1_Xupdwn]^FB Inputs Channel 1^Position;
+	                          .fbRunHOMS.stXdwnEnc.Count:=TIIB[EL5042_M1_Xupdwn]^FB Inputs Channel 2^Position'}
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS
+	'}
+	XRTM1 : DUT_HOMS;
+
+	// Encoder Arrays/RMS Watch:
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:Y
+	'}
+	fbYRMSErrorXRTM1 : FB_RMSWatch;
+	fMaxYRMSErrorXRTM1 : LREAL;
+	fMinYRMSErrorXRTM1 : LREAL;
+
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:X
+	'}
+	fbXRMSErrorXRTM1 : FB_RMSWatch;
+	fMaxXRMSErrorXRTM1 : LREAL;
+	fMinXRMSErrorXRTM1 : LREAL;
+
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:PITCH
+	'}
+	fbPitchRMSErrorXRTM1 : FB_RMSWatch;
+	fMaxPitchRMSErrorXRTM1 : LREAL;
+	fMinPitchRMSErrorXRTM1 : LREAL;
+
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:BENDER
+	'}
+	fbBenderRMSErrorXRTM1 : FB_RMSWatch;
+	fMaxBenderRMSErrorXRTM1 : LREAL;
+	fMinBenderRMSErrorXRTM1 : LREAL;
+
+	// Pitch Control
+	fbXRTM1PitchControl : FB_PitchControl;
+	bXRTM1PitchDone : BOOL;
+	bXRTM1PitchBusy : BOOL;
+
+	// Bender Control
+	fbBenderXRTM1 : FB_Bender;
+
+	// Raw Encoder Counts
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:YUP:CNT
+		field: EGU cnt
+		io: i
+	'}
+	nEncCntYupXRTM1 : UDINT;
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:YDWN:CNT
+		field: EGU cnt
+		io: i
+	'}
+	nEncCntYdwnXRTM1 : UDINT;
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:XUP:CNT
+		field: EGU cnt
+		io: i
+	'}
+	nEncCntXupXRTM1 : UDINT;
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:XDWN:CNT
+		field: EGU cnt
+		io: i
+	'}
+	nEncCntXdwnXRTM1 : UDINT;
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:PITCH:CNT
+		field: EGU cnt
+		io: i
+	'}
+	nEncCntPitchXRTM1 : UDINT;
+
+	// Encoder Reference Values
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:YUP:REF
+		field: EGU cnt
+		io: i
+	'}
+	nEncRefYupXRTM1 : UDINT;
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:YDWN:REF
+		field: EGU cnt
+		io: i
+	'}
+	nEncRefYdwnXRTM1 : UDINT;
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:XUP:REF
+		field: EGU cnt
+		io: i
+	'}
+	nEncRefXupXRTM1 : UDINT;
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:XDWN:REF
+		field: EGU cnt
+		io: i
+	'}
+	nEncRefXdwnXRTM1 : UDINT;
+	{attribute 'pytmc' := '
+		pv: XRTM1:HOMS:ENC:PITCH:REF
+		field: EGU cnt
+		io: i
+	'}
+	nEncRefPitchXRTM1 : UDINT;
+	mcReadParameterPitchXRTM1 : MC_ReadParameter;
+	fEncRefPitchXRTM1_urad : LREAL; // Current Pitch encoder offset in urad
+	///////////////////////////////////////////////////////////////////////
+
 	tpImAPLC : TP := (PT:=T#10S);
 
-	XRTM2PitchControl	    :	FB_PitchControl;
+	XRTM2PitchControl	    :	FB_PitchControlOld;
 	//{attribute 'TcLinkTo' := 	'.Gantry.diEncCnt	:=	TIIB[M2-Y1 (Elmo Drive)]^Inputs^Position actual value'}
 	XRTM2Y_GantryControl	:	FB_Gantry;
 	XRTM2X_GantryControl	:	FB_Gantry;
-	XRTM3PitchControl	    :	FB_PitchControl;
+	XRTM3PitchControl	    :	FB_PitchControlOld;
 //	{attribute 'TcLinkTo' := 	'.Gantry.diEncCnt	:=	TIIB[M3-Y1 (Elmo Drive)]^Inputs^Position actual value'}
 	XRTM3Y_GantryControl	:	FB_Gantry;
 	XRTM3X_GantryControl	:	FB_Gantry;
@@ -69,7 +234,15 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[//System IO
+      <ST><![CDATA[// Beckhoff Version of XRT-M1
+// Raw Encoder Counts For Epics
+nEncCntYupXRTM1 := ULINT_TO_UDINT(XRTM1.fbRunHOMS.stYupEnc.Count);
+nEncCntYdwnXRTM1 := ULINT_TO_UDINT(XRTM1.fbRunHOMS.stYdwnEnc.Count);
+nEncCntXupXRTM1 := ULINT_TO_UDINT(XRTM1.fbRunHOMS.stXupEnc.Count);
+nEncCntXdwnXRTM1 := ULINT_TO_UDINT(XRTM1.fbRunHOMS.stXdwnEnc.Count);
+nEncCntPitchXRTM1 := LINT_TO_UDINT(GVL_XRTM1.XRTM1_Pitch.diEncCnt);
+//////////////////////////////////////////////////////////////
+//System IO
 /////////////////////////////
 p_ModbusRx_OutputCoils();
 p_ModbusRx_PLCMemory();

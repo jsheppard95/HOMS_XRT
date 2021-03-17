@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
-  <POU Name="FB_PitchControl" Id="{157a40f4-fb3c-4f04-8b9b-6aa8032367b0}" SpecialFunc="None">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="FB_PitchControlOld" Id="{157a40f4-fb3c-4f04-8b9b-6aa8032367b0}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'reflection'}
-FUNCTION_BLOCK FB_PitchControl
+FUNCTION_BLOCK FB_PitchControlOld
 VAR_IN_OUT
-	Pitch : HOMS_PitchMechanism;
+	Pitch : HOMS_PitchMechanismOld;
 END_VAR
 VAR_INPUT
 	DirectPiezoMode	:	BOOL := FALSE; //Set this true to tell the piezo what position to seek in closed loop
@@ -405,97 +405,5 @@ mcSmoothMover(Axis:=Pitch.Stepper.stAxis,
 ]]></ST>
       </Implementation>
     </Action>
-    <LineIds Name="FB_PitchControl">
-      <LineId Id="3" Count="35" />
-      <LineId Id="351" Count="0" />
-      <LineId Id="39" Count="17" />
-      <LineId Id="388" Count="0" />
-      <LineId Id="390" Count="1" />
-      <LineId Id="395" Count="1" />
-      <LineId Id="398" Count="0" />
-      <LineId Id="397" Count="0" />
-      <LineId Id="392" Count="2" />
-      <LineId Id="389" Count="0" />
-      <LineId Id="602" Count="1" />
-      <LineId Id="576" Count="0" />
-      <LineId Id="578" Count="18" />
-      <LineId Id="764" Count="1" />
-      <LineId Id="597" Count="4" />
-      <LineId Id="577" Count="0" />
-      <LineId Id="57" Count="6" />
-      <LineId Id="378" Count="0" />
-      <LineId Id="64" Count="1" />
-      <LineId Id="67" Count="0" />
-      <LineId Id="90" Count="8" />
-      <LineId Id="686" Count="0" />
-      <LineId Id="99" Count="5" />
-      <LineId Id="376" Count="0" />
-      <LineId Id="105" Count="3" />
-      <LineId Id="689" Count="0" />
-      <LineId Id="109" Count="11" />
-      <LineId Id="375" Count="0" />
-      <LineId Id="121" Count="11" />
-      <LineId Id="679" Count="2" />
-      <LineId Id="133" Count="3" />
-      <LineId Id="684" Count="0" />
-      <LineId Id="682" Count="1" />
-      <LineId Id="138" Count="7" />
-      <LineId Id="147" Count="0" />
-      <LineId Id="685" Count="0" />
-      <LineId Id="357" Count="0" />
-      <LineId Id="148" Count="1" />
-      <LineId Id="920" Count="0" />
-      <LineId Id="150" Count="0" />
-      <LineId Id="923" Count="0" />
-      <LineId Id="921" Count="1" />
-      <LineId Id="924" Count="2" />
-      <LineId Id="363" Count="1" />
-      <LineId Id="366" Count="0" />
-      <LineId Id="365" Count="0" />
-      <LineId Id="151" Count="0" />
-      <LineId Id="158" Count="0" />
-      <LineId Id="843" Count="2" />
-      <LineId Id="159" Count="0" />
-      <LineId Id="841" Count="1" />
-      <LineId Id="160" Count="1" />
-      <LineId Id="688" Count="0" />
-      <LineId Id="162" Count="8" />
-      <LineId Id="374" Count="0" />
-      <LineId Id="353" Count="2" />
-      <LineId Id="386" Count="0" />
-      <LineId Id="356" Count="0" />
-      <LineId Id="367" Count="1" />
-      <LineId Id="385" Count="0" />
-      <LineId Id="387" Count="0" />
-      <LineId Id="380" Count="2" />
-      <LineId Id="384" Count="0" />
-      <LineId Id="372" Count="1" />
-      <LineId Id="369" Count="0" />
-      <LineId Id="358" Count="0" />
-      <LineId Id="171" Count="6" />
-      <LineId Id="474" Count="0" />
-      <LineId Id="178" Count="0" />
-      <LineId Id="180" Count="1" />
-      <LineId Id="475" Count="0" />
-      <LineId Id="182" Count="1" />
-      <LineId Id="476" Count="0" />
-      <LineId Id="184" Count="1" />
-      <LineId Id="477" Count="0" />
-      <LineId Id="186" Count="20" />
-      <LineId Id="2" Count="0" />
-      <LineId Id="245" Count="5" />
-      <LineId Id="478" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_PitchControl.A_ModeSwitch">
-      <LineId Id="2" Count="11" />
-      <LineId Id="1" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_PitchControl.ACT_PTP">
-      <LineId Id="2" Count="22" />
-      <LineId Id="27" Count="1" />
-      <LineId Id="30" Count="3" />
-      <LineId Id="25" Count="1" />
-      <LineId Id="1" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

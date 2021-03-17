@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <GVL Name="GVL_XRTM1" Id="{a9dbe09a-bd60-4e10-9c09-828b6d9a77ed}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	//XRT M1
+	{attribute 'TcLinkTo' := '.diEncCnt:=TIIB[EL5042_M1_PitchBender]^FB Inputs Channel 1^Position'}
+	XRTM1_Pitch	    :	HOMS_PitchMechanism := (
+		ReqPosLimHi := 220,
+		ReqPosLimLo := -193,
+		diEncPosLimHi := 11216281,
+		diEncPosLimLo := 11004512
+	);
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

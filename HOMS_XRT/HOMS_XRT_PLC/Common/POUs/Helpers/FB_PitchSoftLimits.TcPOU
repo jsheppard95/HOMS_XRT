@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4020.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
   <POU Name="FB_PitchSoftLimits" Id="{3b9899a1-d7a0-44d6-9210-b3d8d5950ecd}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_PitchSoftLimits
 VAR_INPUT
-	Pitch	:	HOMS_PitchMechanism;
+	Pitch	:	HOMS_PitchMechanismOld;
 END_VAR
 VAR_OUTPUT
 	xHiLS	:	BOOL;
@@ -26,11 +26,5 @@ xLoLS R= Pitch.diEncCnt < Pitch.diEncPosLimLo;
 xHiLS := xHiLS AND STO;
 xLoLS := xLoLS AND STO;]]></ST>
     </Implementation>
-    <LineIds Name="FB_PitchSoftLimits">
-      <LineId Id="21" Count="1" />
-      <LineId Id="16" Count="3" />
-      <LineId Id="23" Count="2" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
